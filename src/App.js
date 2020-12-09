@@ -1,10 +1,12 @@
-import './App.css';
+import Layout from './components/Layout/Layout';
 import SweaterPage from './Containers/SweaterPage';
 
 function App() {
 	return (
-		<div className='App'>
-			<SweaterPage />
+		<div>
+			<Layout>
+				<SweaterPage />
+			</Layout>
 		</div>
 	);
 }

@@ -1,12 +1,11 @@
 import React from 'react';
+import classes from './Temperature.module.css';
 
 const Temperature = props => {
 	return (
-		<>
-			<p>
-				HIGH: {props.highTemp} LOW: {props.lowTemp}
-			</p>
-		</>
+		<div className={classes.Temperature}>
+			HIGH: {props.highTemp} LOW: {props.lowTemp}
+		</div>
 	);
 };
 

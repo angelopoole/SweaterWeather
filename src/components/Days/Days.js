@@ -1,6 +1,8 @@
 import React from 'react';
 import Day from './Day/Day';
 
+import classes from './Days.module.css';
+
 const Days = props => {
 	let days;
 
@@ -18,7 +20,7 @@ const Days = props => {
 		});
 	}
 
-	return <div>{days}</div>;
+	return <div className={classes.Days}>{days}</div>;
 };
 
 export default Days;
