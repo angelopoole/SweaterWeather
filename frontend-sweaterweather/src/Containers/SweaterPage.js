@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 import getLocation from '../utils/GetLocation';
 
@@ -13,18 +14,13 @@ const SweaterPage = () => {
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(success);
-  }, []);
-
-
-  
-	useEffect(() => {
-    
-
-    api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
 	}, []);
+
+	useEffect(() => {}, []);
 
 	let locationLogger = () => {
 		console.log(location);
+		console.log(process.env.WEATHER_URL_FROM_GEOLOCATION);
 	};
 
 	return (
