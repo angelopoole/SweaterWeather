@@ -1,7 +1,4 @@
 import axios from 'axios';
-
-const instance = axios.create({
-	baseURL: 'https://sweaterweathertest-default-rtdb.firebaseio.com/',
+export default axios.create({
+	baseURL: 'https://api.weatherbit.io/v2.0/forecast',
 });
-
-export default instance;
