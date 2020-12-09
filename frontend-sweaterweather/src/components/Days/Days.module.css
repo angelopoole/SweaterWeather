@@ -1,0 +1,19 @@
+.Days {
+	display: flex;
+	height: 100%;
+	flex-flow: column-reverse;
+	background-color: skyblue;
+	size: 100%;
+	margin: auto;
+	/* 
+	flex-direction: row;
+	height: 50%; */
+}
+
+@media (min-width: 500px) {
+	.Days {
+		flex: 1;
+		flex-flow: row;
+		justify-content: center;
+	}
+}

@@ -52,10 +52,10 @@ const SweaterPage = () => {
 	};
 
 	return (
-		<div>
+		<>
 			<Days fiveDayWeather={weather} />
 			<button onClick={locationLogger}> log location </button>
-		</div>
+		</>
 	);
 };
 
