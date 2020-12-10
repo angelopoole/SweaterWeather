@@ -20,7 +20,12 @@ const Days = props => {
 		});
 	}
 
-	return <div className={classes.Days}>{days}</div>;
+	return (
+		<div className={classes.Days}>
+			<div>Side </div>
+			{days}
+		</div>
+	);
 };
 
 export default Days;

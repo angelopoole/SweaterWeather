@@ -1,19 +1,32 @@
+/* Mobile devices & base */
 .Days {
 	display: flex;
-	height: 100%;
+
 	flex-flow: column-reverse;
-	background-color: skyblue;
-	size: 100%;
+
+	background: linear-gradient(
+		130deg,
+		rgb(131, 199, 221) 20%,
+		rgb(50, 182, 226) 50%,
+		rgb(31, 157, 199) 100%
+	);
+	height: 100vh;
+	align-items: center;
+	width: 100%;
 	margin: auto;
-	/* 
-	flex-direction: row;
-	height: 50%; */
+	overflow: scroll;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.2rem;
 }
+
+/* if the device is a desktop -> */
 
 @media (min-width: 500px) {
 	.Days {
 		flex: 1;
 		flex-flow: row;
 		justify-content: center;
+		background-color: rgb(173, 216, 230);
 	}
 }
