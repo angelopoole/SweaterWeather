@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 import Day from './Day/Day';
 
-import classes from './Days.module.css';
-
 const DaysWrapper = styled.div`
 	/* Mobile devices & base */
 
