@@ -1,7 +1,41 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import Day from './Day/Day';
 
 import classes from './Days.module.css';
+
+const DaysWrapper = styled.div`
+	/* Mobile devices & base */
+
+	display: flex;
+
+	flex-flow: column-reverse;
+
+	background: linear-gradient(
+		130deg,
+		#83c7dd 20%,
+		rgb(50, 182, 226) 50%,
+		rgb(31, 157, 199) 100%
+	);
+	height: 100vh;
+	align-items: center;
+	width: 100%;
+	margin: auto;
+	overflow: scroll;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.2rem;
+
+	/* if the device is a desktop -> */
+
+	@media (min-width: 500px) {
+		flex: 1;
+		flex-flow: row;
+		justify-content: center;
+		background-color: rgb(173, 216, 230);
+	}
+`;
 
 const Days = props => {
 	let days;
@@ -21,10 +55,10 @@ const Days = props => {
 	}
 
 	return (
-		<div className={classes.Days}>
+		<DaysWrapper>
 			<div>Side </div>
 			{days}
-		</div>
+		</DaysWrapper>
 	);
 };
 
