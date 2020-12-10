@@ -22,7 +22,9 @@ const HeaderWrapper = styled.header`
 	}
 
 	@media (max-width: 499px) {
-		display: ${props => (props.DesktopOnly ? 'none' : 'flex')};
+		nav {
+			display: none;
+		}
 	}
 `;
 
