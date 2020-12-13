@@ -9,10 +9,13 @@ const TempWrapper = styled.div`
 `;
 
 const Temperature = props => {
+	let highFaren = props.conversion(props.highTemp);
+	let lowFaren = props.conversion(props.lowTemp);
+
 	return (
 		<TempWrapper>
-			HIGH: {props.highTemp} <br />
-			LOW: {props.lowTemp}
+			HIGH: {highFaren} <br />
+			LOW: {lowFaren}
 		</TempWrapper>
 	);
 };

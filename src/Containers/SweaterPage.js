@@ -3,6 +3,8 @@ import api from '../default-axios-instance';
 import Days from '../components/Days/Days';
 // import styled from 'styled-components';
 
+// The Sweater page takes in components from days and uses it to display date, weather and sweater status
+
 const SweaterPage = () => {
 	let [weather, setWeather] = useState();
 	let [location, setLocation] = useState({ latitude: '', longitude: '' });

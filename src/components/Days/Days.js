@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import Day from './Day/Day';
 
+// Takes in day and creates multiple based on the weather data being passed to it.
+
 const DaysWrapper = styled.div`
 	/* Mobile devices & base */
 
@@ -43,6 +45,7 @@ const Days = props => {
 			return (
 				<Day
 					key={day.datetime}
+					date={day.datetime}
 					dayDescription={day.weather.description}
 					lowTemp={day.low_temp}
 					highTemp={day.high_temp}
