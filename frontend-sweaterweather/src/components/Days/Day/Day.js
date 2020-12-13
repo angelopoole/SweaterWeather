@@ -22,11 +22,23 @@ const DayWrapper = styled.div`
 	}
 `;
 
+// T(°F) = T(°C) × 1.8 + 32
+
+const celciusToFarenheight = celTemp => {
+	let farenheight = celTemp * 1.8 + 32;
+	return farenheight.toFixed(2);
+};
+
 const Day = props => {
 	return (
 		<DayWrapper>
 			<WeatherImage weatherImgCode={props.weatherImgCode} />
-			<Temperature lowTemp={props.lowTemp} highTemp={props.highTemp} />
+			{props.date}
+			<Temperature
+				conversion={celciusToFarenheight}
+				lowTemp={props.lowTemp}
+				highTemp={props.highTemp}
+			/>
 		</DayWrapper>
 	);
 };
