@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const DayWrapper = styled.div`
 	flex: 1;
 	background-color: whitesmoke;
-	border-radius: 9;
+	border-radius: 90px;
 
 	margin: 0 15px;
 	padding: 10px 50px;
@@ -26,7 +26,7 @@ const DayWrapper = styled.div`
 
 const celciusToFarenheight = celTemp => {
 	let farenheight = celTemp * 1.8 + 32;
-	return farenheight.toFixed(2);
+	return farenheight.toFixed();
 };
 
 const Day = props => {
@@ -35,6 +35,7 @@ const Day = props => {
 			<WeatherImage weatherImgCode={props.weatherImgCode} />
 			{props.date}
 			<Temperature
+				isFarenheight={props.isFarenheight}
 				conversion={celciusToFarenheight}
 				lowTemp={props.lowTemp}
 				highTemp={props.highTemp}

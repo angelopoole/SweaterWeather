@@ -7,11 +7,8 @@ import Day from './Day/Day';
 
 const DaysWrapper = styled.div`
 	/* Mobile devices & base */
-
 	display: flex;
-
 	flex-flow: column-reverse;
-
 	background: linear-gradient(
 		130deg,
 		#83c7dd 20%,
@@ -44,6 +41,7 @@ const Days = props => {
 		days = props.fiveDayWeather.map(day => {
 			return (
 				<Day
+					isFarenheight={props.isFarenheight}
 					key={day.datetime}
 					date={day.datetime}
 					dayDescription={day.weather.description}
@@ -55,12 +53,7 @@ const Days = props => {
 		});
 	}
 
-	return (
-		<DaysWrapper>
-			<div>Side </div>
-			{days}
-		</DaysWrapper>
-	);
+	return <DaysWrapper>{days}</DaysWrapper>;
 };
 
 export default Days;

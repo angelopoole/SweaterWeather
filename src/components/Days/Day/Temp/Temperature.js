@@ -1,11 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
 
-import classes from './Temperature.module.css';
-
 const TempWrapper = styled.div`
-	background-color: transparent;
-	color: black;
+	/* background-color: transparent; */
+	/* color: black; */
 `;
 
 const Temperature = props => {
@@ -14,8 +11,8 @@ const Temperature = props => {
 
 	return (
 		<TempWrapper>
-			HIGH: {highFaren} <br />
-			LOW: {lowFaren}
+			HIGH: {props.isFarenheight ? highFaren : props.highTemp}° <br />
+			LOW: {props.isFarenheight ? lowFaren : props.lowTemp}°
 		</TempWrapper>
 	);
 };
