@@ -8,6 +8,11 @@ import Days from '../components/Days/Days';
 const SweaterPage = () => {
 	let [weather, setWeather] = useState();
 	let [location, setLocation] = useState({ latitude: '', longitude: '' });
+	const [isFarenheight, setIsFarenheight] = useState(true);
+
+	const handleTempChange = () => {
+		setIsFarenheight(stateBefore => !stateBefore);
+	};
 
 	// Get current latitude and longitude. Sets location state
 	useEffect(() => {
@@ -55,7 +60,11 @@ const SweaterPage = () => {
 
 	return (
 		<>
-			<Days fiveDayWeather={weather} />
+			<Days
+				fiveDayWeather={weather}
+				isFarenheight={isFarenheight}
+				handleTempChange={handleTempChange}
+			/>
 			{/* <button onClick={locationLogger}> log location </button> */}
 		</>
 	);
