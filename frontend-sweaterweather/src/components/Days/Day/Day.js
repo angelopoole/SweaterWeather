@@ -1,9 +1,13 @@
+//Libs
 import React from 'react';
+import styled from 'styled-components';
 
+//Components
 import Temperature from './Temp/Temperature';
 import WeatherImage from './WeatherImage/WeatherImage';
 
-import styled from 'styled-components';
+//Redux
+import { useDispatch, useSelector } from 'react-redux';
 
 const DayWrapper = styled.div`
 	flex: 1;
@@ -22,14 +26,19 @@ const DayWrapper = styled.div`
 	}
 `;
 
-// T(°F) = T(°C) × 1.8 + 32
-
 const celciusToFarenheight = celTemp => {
 	let farenheight = celTemp * 1.8 + 32;
 	return farenheight.toFixed();
 };
 
 const Day = props => {
+	const dispatch = useDispatch();
+	const counter = useSelector(state => state.counterReducer.count);
+
+	const countIncrementHandler = () => {
+		dispatch({ type: 'INCREMENT_ONE' });
+	};
+
 	return (
 		<DayWrapper>
 			<WeatherImage weatherImgCode={props.weatherImgCode} />
@@ -40,6 +49,7 @@ const Day = props => {
 				lowTemp={props.lowTemp}
 				highTemp={props.highTemp}
 			/>
+			<button onClick={countIncrementHandler}> {counter} </button>
 		</DayWrapper>
 	);
 };
