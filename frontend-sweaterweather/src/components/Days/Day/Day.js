@@ -44,7 +44,6 @@ const Day = props => {
 			<WeatherImage weatherImgCode={props.weatherImgCode} />
 			{props.date}
 			<Temperature
-				isFarenheight={props.isFarenheight}
 				conversion={celciusToFarenheight}
 				lowTemp={props.lowTemp}
 				highTemp={props.highTemp}

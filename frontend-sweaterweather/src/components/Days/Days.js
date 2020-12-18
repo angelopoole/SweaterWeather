@@ -36,13 +36,11 @@ const DaysWrapper = styled.div`
 
 const Days = props => {
 	let days;
-	console.log(props);
 
 	if (props.fiveDayWeather) {
 		days = props.fiveDayWeather.map(day => {
 			return (
 				<Day
-					isFarenheight={props.isFarenheight}
 					key={day.datetime}
 					date={day.datetime}
 					dayDescription={day.weather.description}

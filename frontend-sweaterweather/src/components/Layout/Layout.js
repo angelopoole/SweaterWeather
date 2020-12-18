@@ -19,8 +19,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CalendarTodayTwoToneIcon from '@material-ui/icons/CalendarTodayTwoTone';
 import CloudTwoToneIcon from '@material-ui/icons/CloudTwoTone';
 import Switch from '@material-ui/core/Switch';
+import Grid from '@material-ui/core/Grid';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { FLIP_SCALE } from '../../Redux/types';
 
 // This is the layout page for the app, it is imported from app.js and wraps the whole site
 
@@ -89,9 +91,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Layout(props) {
-	let scaleFarenheight = useSelector(
-		state => state.weatherReducer.scaleFarenheight
+	const scaleFarenheight = useSelector(
+		state => state.weatherReducer.scaleCelcius
 	);
+	const dispatch = useDispatch();
 	const classes = useStyles();
 	const theme = useTheme();
 	const [open, setOpen] = useState(false);
@@ -128,11 +131,20 @@ export default function Layout(props) {
 					<Typography variant='h6' noWrap style={{ flex: 1 }}>
 						Sweater Weather!
 					</Typography>
-					<FormControlLabel
-						control={<Switch label='start' value='start' />}
-						label='°F'
-						labelPlacement='start'
-					/>
+					<Typography component='div'>
+						<Grid component='label' container alignItems='center' spacing={1}>
+							<Grid item>°F</Grid>
+							<Grid item>
+								<Switch
+									label='start'
+									value='start'
+									checked={scaleFarenheight}
+									onChange={() => dispatch({ type: FLIP_SCALE })}
+								/>
+							</Grid>
+							<Grid item>°C</Grid>
+						</Grid>
+					</Typography>
 				</Toolbar>
 			</AppBar>
 			<Drawer

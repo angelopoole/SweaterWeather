@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+//libs
+import React, { useEffect } from 'react';
 
+//components
 import Days from '../components/Days/Days';
 
+//redux
 import { useDispatch, useSelector } from 'react-redux';
-
 import { getWeather } from '../Redux/Actions/weatherAction';
-// import styled from 'styled-components';
 
 // The Sweater page takes in components from days and uses it to display date, weather and sweater status
 
@@ -14,14 +15,11 @@ const SweaterPage = () => {
 	const location = useSelector(state => state.weatherReducer.location);
 	const weekWeather = useSelector(state => state.weatherReducer.weekly);
 
-	// let [weather, setWeather] = useState();
+	// i want to create something that takes in redux state and sets it to localstorage in order to populate the website faster.
 
-	const [isFarenheight, setIsFarenheight] = useState(true);
+	//
 
-	const handleTempChange = () => {
-		setIsFarenheight(stateBefore => !stateBefore);
-	};
-
+	// console.log(window);
 	// Get current latitude and longitude. Sets location state
 	useEffect(() => {
 		let options = {
@@ -44,7 +42,7 @@ const SweaterPage = () => {
 		}
 
 		navigator.geolocation.getCurrentPosition(success, error, options);
-	}, []);
+	}, [dispatch]);
 
 	// ping api for weather data based on current location. Sets weather state
 	useEffect(() => {
@@ -57,17 +55,11 @@ const SweaterPage = () => {
 		} else {
 			getFiveDayForcast(location);
 		}
-	}, [location]);
-
-	console.log(weekWeather);
+	}, [location, dispatch]);
 
 	return (
 		<>
-			<Days
-				fiveDayWeather={weekWeather}
-				isFarenheight={isFarenheight}
-				handleTempChange={handleTempChange}
-			/>
+			<Days fiveDayWeather={weekWeather} />
 		</>
 	);
 };

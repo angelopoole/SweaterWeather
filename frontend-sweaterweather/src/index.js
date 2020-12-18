@@ -4,8 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import store from './Redux/store';
+import { saveState } from './utils/localStorage';
+import throttle from 'lodash/throttle';
+
+store.subscribe(
+	throttle(() => {
+		console.log('throttleTimer');
+		saveState(store.getState());
+	}, 5000)
+);
 
 ReactDOM.render(
 	<React.StrictMode>

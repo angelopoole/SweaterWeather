@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const TempWrapper = styled.div`
 	/* background-color: transparent; */
@@ -6,13 +7,15 @@ const TempWrapper = styled.div`
 `;
 
 const Temperature = props => {
+	let scaleCelcius = useSelector(state => state.weatherReducer.scaleCelcius);
 	let highFaren = props.conversion(props.highTemp);
 	let lowFaren = props.conversion(props.lowTemp);
+	let scale = scaleCelcius ? 'C' : 'F';
 
 	return (
 		<TempWrapper>
-			HIGH: {props.isFarenheight ? highFaren : props.highTemp}° <br />
-			LOW: {props.isFarenheight ? lowFaren : props.lowTemp}°
+			HIGH: {scaleCelcius ? props.highTemp : highFaren}°{scale} <br />
+			LOW: {scaleCelcius ? props.lowTemp : lowFaren}°{scale}
 		</TempWrapper>
 	);
 };
