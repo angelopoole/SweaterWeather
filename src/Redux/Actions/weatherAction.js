@@ -1,5 +1,5 @@
 import api from '../../default-axios-instance';
-import { GET_WEATHER } from '../types';
+import { GET_WEATHER, FLIP_SCALE, GET_MONTH, GET_HOURLY } from '../types';
 
 export const getWeather = (latitude, longitude) => {
 	return async dispatch => {
@@ -9,14 +9,30 @@ export const getWeather = (latitude, longitude) => {
 				// `daily?days=5&city=${city}&key=${process.env.REACT_APP_WEATHER_API}`
 			);
 
+			const hourly = await api.get(
+				`hourly?hours=12&lat=${latitude}&lon=${longitude}&key=${process.env.REACT_APP_WEATHER_API}`
+			);
+
+			const hourlyData = await hourly.data.data;
 			const resData = await res.data.data;
 
 			dispatch({
 				type: GET_WEATHER,
 				payload: resData,
 			});
+
+			dispatch({
+				type: GET_HOURLY,
+				payload: hourlyData,
+			});
 		} catch (err) {
 			console.error(err);
 		}
+	};
+};
+
+export const flipScale = () => {
+	return {
+		type: FLIP_SCALE,
 	};
 };
