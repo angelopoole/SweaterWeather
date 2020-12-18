@@ -36,7 +36,7 @@ const Day = props => {
 	const counter = useSelector(state => state.counterReducer.count);
 
 	const countIncrementHandler = () => {
-		dispatch({ type: 'INCREMENT_ONE' });
+		dispatch({ index: props.date, type: 'INCREMENT_ONE' });
 	};
 
 	return (

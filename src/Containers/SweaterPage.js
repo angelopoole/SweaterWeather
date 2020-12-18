@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../default-axios-instance';
+
 import Days from '../components/Days/Days';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,9 +12,10 @@ import { getWeather } from '../Redux/Actions/weatherAction';
 const SweaterPage = () => {
 	const dispatch = useDispatch();
 	const location = useSelector(state => state.weatherReducer.location);
-	console.log({ location: location });
-	let [weather, setWeather] = useState();
-	// let [location, setLocation] = useState({ latitude: '', longitude: '' });
+	const weekWeather = useSelector(state => state.weatherReducer.weekly);
+
+	// let [weather, setWeather] = useState();
+
 	const [isFarenheight, setIsFarenheight] = useState(true);
 
 	const handleTempChange = () => {
@@ -49,14 +50,8 @@ const SweaterPage = () => {
 	useEffect(() => {
 		const getFiveDayForcast = async location => {
 			const { latitude, longitude } = location;
-			const res = await api.get(
-				`daily?days=5&lat=${latitude}&lon=${longitude}&key=${process.env.REACT_APP_WEATHER_API}`
-			);
-			if (res.data.data) {
-				setWeather(res.data.data);
-			}
+			dispatch(getWeather(latitude, longitude));
 		};
-		console.log(location);
 		if (location.latitude === '') {
 			return;
 		} else {
@@ -64,16 +59,12 @@ const SweaterPage = () => {
 		}
 	}, [location]);
 
-	// Debug button, lets me check state and weather.
-	let locationLogger = () => {
-		console.log(location);
-		console.log(weather);
-	};
+	console.log(weekWeather);
 
 	return (
 		<>
 			<Days
-				fiveDayWeather={weather}
+				fiveDayWeather={weekWeather}
 				isFarenheight={isFarenheight}
 				handleTempChange={handleTempChange}
 			/>

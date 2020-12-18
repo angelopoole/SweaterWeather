@@ -1,7 +1,7 @@
 let initialState = {
 	location: { latitude: '', longitude: '' },
-	Weekly: { day: '', time: '' },
-	Monthly: [{}],
+	weekly: null,
+	monthly: [{}],
 	temperature: {
 		farenheight: { low: 0, high: 0 },
 		celcius: { low: 0, high: 0 },
@@ -13,6 +13,11 @@ const weatherReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case 'SET_LOCATION':
 			return { ...state, location: payload };
+		case 'GET_WEATHER':
+			return {
+				...state,
+				weekly: payload,
+			};
 
 		default:
 			return state;
