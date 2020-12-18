@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import api from '../default-axios-instance';
 import Days from '../components/Days/Days';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getWeather } from '../Redux/Actions/weatherAction';
 // import styled from 'styled-components';
 
 // The Sweater page takes in components from days and uses it to display date, weather and sweater status
 
 const SweaterPage = () => {
+	const dispatch = useDispatch();
+	const location = useSelector(state => state.weatherReducer.location);
+	console.log({ location: location });
 	let [weather, setWeather] = useState();
-	let [location, setLocation] = useState({ latitude: '', longitude: '' });
+	// let [location, setLocation] = useState({ latitude: '', longitude: '' });
 	const [isFarenheight, setIsFarenheight] = useState(true);
 
 	const handleTempChange = () => {
@@ -21,9 +28,14 @@ const SweaterPage = () => {
 		};
 		let success = pos => {
 			const crd = pos.coords;
-			setLocation({
+			let payload = {
 				latitude: crd.latitude.toFixed(0),
 				longitude: crd.longitude.toFixed(0),
+			};
+
+			dispatch({
+				type: 'SET_LOCATION',
+				payload,
 			});
 		};
 		function error(err) {
@@ -44,7 +56,7 @@ const SweaterPage = () => {
 				setWeather(res.data.data);
 			}
 		};
-
+		console.log(location);
 		if (location.latitude === '') {
 			return;
 		} else {
@@ -65,7 +77,6 @@ const SweaterPage = () => {
 				isFarenheight={isFarenheight}
 				handleTempChange={handleTempChange}
 			/>
-			{/* <button onClick={locationLogger}> log location </button> */}
 		</>
 	);
 };
