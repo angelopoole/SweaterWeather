@@ -129,14 +129,7 @@ export default function Layout(props) {
 						Sweater Weather!
 					</Typography>
 					<FormControlLabel
-						control={
-							<Switch
-								label='start'
-								value='start'
-								checked={console.log('stutter')}
-								onChange={console.log('switched')}
-							/>
-						}
+						control={<Switch label='start' value='start' />}
 						label='°F'
 						labelPlacement='start'
 					/>
