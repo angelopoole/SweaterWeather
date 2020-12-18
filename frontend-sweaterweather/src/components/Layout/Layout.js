@@ -20,6 +20,8 @@ import CalendarTodayTwoToneIcon from '@material-ui/icons/CalendarTodayTwoTone';
 import CloudTwoToneIcon from '@material-ui/icons/CloudTwoTone';
 import Switch from '@material-ui/core/Switch';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 // This is the layout page for the app, it is imported from app.js and wraps the whole site
 
 const drawerWidth = 240;
@@ -87,6 +89,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Layout(props) {
+	let scaleFarenheight = useSelector(
+		state => state.weatherReducer.scaleFarenheight
+	);
 	const classes = useStyles();
 	const theme = useTheme();
 	const [open, setOpen] = useState(false);
@@ -124,7 +129,14 @@ export default function Layout(props) {
 						Sweater Weather!
 					</Typography>
 					<FormControlLabel
-						control={<Switch label='start' value='start' />}
+						control={
+							<Switch
+								label='start'
+								value='start'
+								checked={console.log('stutter')}
+								onChange={console.log('switched')}
+							/>
+						}
 						label='°F'
 						labelPlacement='start'
 					/>

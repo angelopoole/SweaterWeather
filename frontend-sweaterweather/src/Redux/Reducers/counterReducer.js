@@ -1,13 +1,14 @@
 const initialState = {
+	index: null,
 	count: 0,
 };
 
-const counterReducer = (state = initialState, { type, payload }) => {
+const counterReducer = (state = initialState, { type, payload, index }) => {
 	switch (type) {
 		case 'INCREMENT_ONE':
-			console.log({ type, payload });
-			console.log({ state });
-			return { count: state.count + 1 };
+			console.log(index);
+
+			return { ...state, count: state.count + 1, index: index };
 
 		default:
 			return state;
