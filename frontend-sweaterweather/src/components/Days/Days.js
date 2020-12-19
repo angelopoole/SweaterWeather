@@ -16,11 +16,9 @@ const DaysWrapper = styled.div`
 	margin: auto;
 	overflow: scroll;
 	text-align: center;
-	/* font-weight: bold; */
 	font-size: 1.2rem;
 
 	/* if the device is a desktop -> */
-
 	@media (min-width: 500px) {
 		background: linear-gradient(
 			130deg,
@@ -32,7 +30,6 @@ const DaysWrapper = styled.div`
 		flex: 1;
 		flex-flow: row;
 		justify-content: center;
-		/* background-color: rgb(173, 216, 230); */
 	}
 `;
 

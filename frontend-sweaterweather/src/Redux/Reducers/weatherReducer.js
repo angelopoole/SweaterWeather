@@ -11,6 +11,7 @@ let initialState = {
 	weekly: null,
 	hourly: null,
 	temperature: {
+		// create reducer that sets these to the current hour
 		farenheight: { low: 0, high: 0 },
 		celcius: { low: 0, high: 0 },
 	},

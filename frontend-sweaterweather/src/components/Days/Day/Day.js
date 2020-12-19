@@ -18,12 +18,6 @@ const DayWrapper = styled.div`
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
 		0 0 40px rgba(128, 128, 128, 0.1) inset;
 
-	&.temp {
-		line-height: 60px;
-		background-color: brown;
-		color: brown;
-	}
-
 	&:hover {
 		cursor: pointer;
 		box-shadow: 9px 7px 40px -6px rgba(0, 0, 0, 0.25);
