@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
 
 const Temperature = props => {
 	let scaleCelcius = useSelector(state => state.weatherReducer.scaleCelcius);

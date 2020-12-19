@@ -5,16 +5,6 @@ import Day from './Day/Day';
 
 // Takes in day and creates multiple based on the weather data being passed to it.
 
-const LayoutDiv = styled.div`
-	height: 100vh;
-	background: linear-gradient(
-		130deg,
-		#83c7dd 20%,
-		rgb(50, 182, 226) 50%,
-		rgb(31, 157, 199) 100%
-	);
-`;
-
 const DaysWrapper = styled.div`
 	/* Mobile devices & base */
 	display: flex;
@@ -44,12 +34,6 @@ const DaysWrapper = styled.div`
 		justify-content: center;
 		/* background-color: rgb(173, 216, 230); */
 	}
-`;
-
-const HourlyWrapper = styled.div`
-	display: flex;
-
-	height: 50vh;
 `;
 
 const Days = props => {
