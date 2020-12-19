@@ -19,7 +19,6 @@ const SweaterPage = () => {
 
 	//
 
-	// console.log(window);
 	// Get current latitude and longitude. Sets location state
 	useEffect(() => {
 		let options = {
