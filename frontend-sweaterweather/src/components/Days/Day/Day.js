@@ -50,11 +50,3 @@ const Day = props => {
 };
 
 export default Day;
-
-/* <Day
-          key={day.datetime}
-          dayDescription={day.weather.description}
-          lowTemp={day.low_temp}
-          highTemp={day.high_temp}
-          weatherImgCode={day.weather.icon}
-        /> */
