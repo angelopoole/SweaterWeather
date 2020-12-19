@@ -17,6 +17,7 @@ const DaysWrapper = styled.div`
 	overflow: scroll;
 	text-align: center;
 	font-size: 1.2rem;
+	overflow-y: scroll;
 
 	/* if the device is a desktop -> */
 	@media (min-width: 500px) {
