@@ -20,7 +20,7 @@ const DaysWrapper = styled.div`
 	display: flex;
 	flex-flow: column-reverse;
 	background: transparent;
-	height: 110vh;
+	height: 100px;
 	align-items: center;
 	width: 100%;
 	margin: auto;
@@ -38,6 +38,7 @@ const DaysWrapper = styled.div`
 			rgb(50, 182, 226) 50%,
 			rgb(31, 157, 199) 100%
 		);
+		height: 110vh;
 		flex: 1;
 		flex-flow: row;
 		justify-content: center;

@@ -1,26 +1,28 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-let TempDiv = styled.div`
-	/* background-color: brown; */
-	&.temp {
-		background-color: brown;
-	}
-`;
-
 const Temperature = props => {
 	let scaleCelcius = useSelector(state => state.weatherReducer.scaleCelcius);
 	let highFaren = props.conversion(props.highTemp);
 	let lowFaren = props.conversion(props.lowTemp);
 	let scale = scaleCelcius ? 'C' : 'F';
 
+	let clothingChoice = () => {
+		if (lowFaren <= 55) {
+			return <p> WEAR A COAT 🧥 </p>;
+		} else if (lowFaren <= 65 && lowFaren > 55) {
+			return <p> ITS SWEATER WEATHER 🍂 </p>;
+		}
+	};
+
 	return (
-		<TempDiv>
+		<>
 			<div>
 				HIGH: {scaleCelcius ? props.highTemp : highFaren}°{scale} <br />
 				LOW: {scaleCelcius ? props.lowTemp : lowFaren}°{scale}
 			</div>
-		</TempDiv>
+			{clothingChoice()}
+		</>
 	);
 };
 

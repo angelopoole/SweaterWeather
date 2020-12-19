@@ -186,10 +186,7 @@ export default function Layout(props) {
 				</List>
 				<Divider />
 			</Drawer>
-			<main>
-				{/* <div className={classes.toolbar} /> */}
-				{props.children}
-			</main>
+			<main>{props.children}</main>
 		</div>
 	);
 }
