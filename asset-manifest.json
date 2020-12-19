@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/SweaterWeather/static/css/main.c0e5a68a.chunk.css",
+    "main.js": "/SweaterWeather/static/js/main.0a5855de.chunk.js",
+    "main.js.map": "/SweaterWeather/static/js/main.0a5855de.chunk.js.map",
+    "runtime-main.js": "/SweaterWeather/static/js/runtime-main.4f13e22d.js",
+    "runtime-main.js.map": "/SweaterWeather/static/js/runtime-main.4f13e22d.js.map",
+    "static/js/2.cb60629a.chunk.js": "/SweaterWeather/static/js/2.cb60629a.chunk.js",
+    "static/js/2.cb60629a.chunk.js.map": "/SweaterWeather/static/js/2.cb60629a.chunk.js.map",
+    "static/js/3.56cdcce4.chunk.js": "/SweaterWeather/static/js/3.56cdcce4.chunk.js",
+    "static/js/3.56cdcce4.chunk.js.map": "/SweaterWeather/static/js/3.56cdcce4.chunk.js.map",
+    "index.html": "/SweaterWeather/index.html",
+    "static/css/main.c0e5a68a.chunk.css.map": "/SweaterWeather/static/css/main.c0e5a68a.chunk.css.map",
+    "static/js/2.cb60629a.chunk.js.LICENSE.txt": "/SweaterWeather/static/js/2.cb60629a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4f13e22d.js",
+    "static/js/2.cb60629a.chunk.js",
+    "static/css/main.c0e5a68a.chunk.css",
+    "static/js/main.0a5855de.chunk.js"
+  ]
+}
