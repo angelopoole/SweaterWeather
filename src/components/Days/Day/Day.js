@@ -7,22 +7,26 @@ import Temperature from './Temp/Temperature';
 import WeatherImage from './WeatherImage/WeatherImage';
 
 //Redux
-import { useDispatch, useSelector } from 'react-redux';
 
 const DayWrapper = styled.div`
 	flex: 1;
-	background-color: whitesmoke;
+	background-color: rgba(245, 245, 245, 0.65);
 	border-radius: 90px;
-
 	margin: 0 15px;
 	padding: 10px 50px;
 	transition: 0.3s all ease;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
 		0 0 40px rgba(128, 128, 128, 0.1) inset;
 
+	&.temp {
+		line-height: 60px;
+		background-color: brown;
+		color: brown;
+	}
+
 	&:hover {
 		cursor: pointer;
-		box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+		box-shadow: 9px 7px 40px -6px rgba(0, 0, 0, 0.25);
 	}
 `;
 
@@ -32,13 +36,6 @@ const celciusToFarenheight = celTemp => {
 };
 
 const Day = props => {
-	const dispatch = useDispatch();
-	const counter = useSelector(state => state.counterReducer.count);
-
-	const countIncrementHandler = () => {
-		dispatch({ index: props.date, type: 'INCREMENT_ONE' });
-	};
-
 	return (
 		<DayWrapper>
 			<WeatherImage weatherImgCode={props.weatherImgCode} />
@@ -48,7 +45,6 @@ const Day = props => {
 				lowTemp={props.lowTemp}
 				highTemp={props.highTemp}
 			/>
-			<button onClick={countIncrementHandler}> {counter} </button>
 		</DayWrapper>
 	);
 };

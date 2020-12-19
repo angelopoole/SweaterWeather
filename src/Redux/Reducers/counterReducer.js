@@ -13,10 +13,6 @@ const counterReducer = (state = initialState, { type, payload, index }) => {
 		default:
 			return state;
 	}
-
-	function incrementor(number) {
-		let res = state.count + number;
-	}
 };
 
 export default counterReducer;
