@@ -20,7 +20,7 @@ const DaysWrapper = styled.div`
 	display: flex;
 	flex-flow: column-reverse;
 	background: transparent;
-	height: 100vh;
+	height: 110vh;
 	align-items: center;
 	width: 100%;
 	margin: auto;
@@ -32,6 +32,12 @@ const DaysWrapper = styled.div`
 	/* if the device is a desktop -> */
 
 	@media (min-width: 500px) {
+		background: linear-gradient(
+			130deg,
+			#83c7dd 20%,
+			rgb(50, 182, 226) 50%,
+			rgb(31, 157, 199) 100%
+		);
 		flex: 1;
 		flex-flow: row;
 		justify-content: center;
@@ -64,11 +70,9 @@ const Days = props => {
 	}
 
 	return (
-		<LayoutDiv>
-			<DaysWrapper>
-				{days} <br />
-			</DaysWrapper>
-		</LayoutDiv>
+		<DaysWrapper>
+			{days} <br />
+		</DaysWrapper>
 	);
 };
 
