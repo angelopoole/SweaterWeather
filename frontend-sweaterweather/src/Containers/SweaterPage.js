@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import api from '../default-axios-instance';
+//libs
+import React, { useEffect } from 'react';
+
+//components
 import Days from '../components/Days/Days';
-// import styled from 'styled-components';
+
+//redux
+import { useDispatch, useSelector } from 'react-redux';
+import { getWeather } from '../Redux/Actions/weatherAction';
 
 // The Sweater page takes in components from days and uses it to display date, weather and sweater status
 
 const SweaterPage = () => {
-	let [weather, setWeather] = useState();
-	let [location, setLocation] = useState({ latitude: '', longitude: '' });
-	const [isFarenheight, setIsFarenheight] = useState(true);
+	const dispatch = useDispatch();
+	const location = useSelector(state => state.weatherReducer.location);
+	const weekWeather = useSelector(state => state.weatherReducer.weekly);
 
-	const handleTempChange = () => {
-		setIsFarenheight(stateBefore => !stateBefore);
-	};
+	// i want to create something that takes in redux state and sets it to localstorage in order to populate the website faster.
+
+	//
 
 	// Get current latitude and longitude. Sets location state
 	useEffect(() => {
@@ -21,9 +26,14 @@ const SweaterPage = () => {
 		};
 		let success = pos => {
 			const crd = pos.coords;
-			setLocation({
+			let payload = {
 				latitude: crd.latitude.toFixed(0),
 				longitude: crd.longitude.toFixed(0),
+			};
+
+			dispatch({
+				type: 'SET_LOCATION',
+				payload,
 			});
 		};
 		function error(err) {
@@ -31,41 +41,24 @@ const SweaterPage = () => {
 		}
 
 		navigator.geolocation.getCurrentPosition(success, error, options);
-	}, []);
+	}, [dispatch]);
 
 	// ping api for weather data based on current location. Sets weather state
 	useEffect(() => {
 		const getFiveDayForcast = async location => {
 			const { latitude, longitude } = location;
-			const res = await api.get(
-				`daily?days=5&lat=${latitude}&lon=${longitude}&key=${process.env.REACT_APP_WEATHER_API}`
-			);
-			if (res.data.data) {
-				setWeather(res.data.data);
-			}
+			dispatch(getWeather(latitude, longitude));
 		};
-
 		if (location.latitude === '') {
 			return;
 		} else {
 			getFiveDayForcast(location);
 		}
-	}, [location]);
-
-	// Debug button, lets me check state and weather.
-	let locationLogger = () => {
-		console.log(location);
-		console.log(weather);
-	};
+	}, [location, dispatch]);
 
 	return (
 		<>
-			<Days
-				fiveDayWeather={weather}
-				isFarenheight={isFarenheight}
-				handleTempChange={handleTempChange}
-			/>
-			{/* <button onClick={locationLogger}> log location </button> */}
+			<Days fiveDayWeather={weekWeather} />
 		</>
 	);
 };
