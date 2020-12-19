@@ -5,9 +5,13 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	/* overflow-y: hidden; */
-	/* overflow-x: hidden; */
-	overflow: hidden;
+	overflow-y: hidden;
+	overflow-x: hidden;
+
+	/* @media (min-width: 500px) { */
+	padding-top: 56px;
+	/* } */
+	/* overflow: hidden; */
 }
 
 code {

@@ -116,7 +116,7 @@ export default function Layout(props) {
 					[classes.appBarShift]: open,
 				})}
 			>
-				<Toolbar>
+				<Toolbar style={{ width: 'min-content' }}>
 					<IconButton
 						color='inherit'
 						aria-label='open drawer'
