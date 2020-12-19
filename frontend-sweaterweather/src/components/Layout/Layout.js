@@ -15,7 +15,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 import CalendarTodayTwoToneIcon from '@material-ui/icons/CalendarTodayTwoTone';
 import CloudTwoToneIcon from '@material-ui/icons/CloudTwoTone';
 import Switch from '@material-ui/core/Switch';

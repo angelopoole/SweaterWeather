@@ -1,9 +1,11 @@
-import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 
-const TempWrapper = styled.div`
-	/* background-color: transparent; */
-	/* color: black; */
+let TempDiv = styled.div`
+	/* background-color: brown; */
+	&.temp {
+		background-color: brown;
+	}
 `;
 
 const Temperature = props => {
@@ -13,10 +15,12 @@ const Temperature = props => {
 	let scale = scaleCelcius ? 'C' : 'F';
 
 	return (
-		<TempWrapper>
-			HIGH: {scaleCelcius ? props.highTemp : highFaren}°{scale} <br />
-			LOW: {scaleCelcius ? props.lowTemp : lowFaren}°{scale}
-		</TempWrapper>
+		<TempDiv>
+			<div>
+				HIGH: {scaleCelcius ? props.highTemp : highFaren}°{scale} <br />
+				LOW: {scaleCelcius ? props.lowTemp : lowFaren}°{scale}
+			</div>
+		</TempDiv>
 	);
 };
 

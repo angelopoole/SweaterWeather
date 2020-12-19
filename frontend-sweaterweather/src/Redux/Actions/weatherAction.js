@@ -1,5 +1,5 @@
 import api from '../../default-axios-instance';
-import { GET_WEATHER, FLIP_SCALE, GET_MONTH, GET_HOURLY } from '../types';
+import { GET_WEATHER, FLIP_SCALE, GET_HOURLY } from '../types';
 
 export const getWeather = (latitude, longitude) => {
 	return async dispatch => {
