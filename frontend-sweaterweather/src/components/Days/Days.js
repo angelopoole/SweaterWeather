@@ -8,7 +8,7 @@ import Day from './Day/Day';
 const DaysWrapper = styled.div`
 	/* Mobile devices & base */
 	display: flex;
-	flex-flow: column-reverse;
+	flex-flow: column;
 	height: 100vh;
 
 	background: linear-gradient(
