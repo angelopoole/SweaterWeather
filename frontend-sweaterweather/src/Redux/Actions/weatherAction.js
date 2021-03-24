@@ -9,11 +9,11 @@ export const getWeather = (latitude, longitude) => {
 				// `daily?days=5&city=${city}&key=${process.env.REACT_APP_WEATHER_API}`
 			);
 
-			const hourly = await api.get(
-				`hourly?hours=12&lat=${latitude}&lon=${longitude}&key=${process.env.REACT_APP_WEATHER_API}`
-			);
+			// const hourly = await api.get(
+			// `hourly?hours=12&lat=${latitude}&lon=${longitude}&key=${process.env.REACT_APP_WEATHER_API}`
+			// );
 
-			const hourlyData = await hourly.data.data;
+			// const hourlyData = await hourly.data.data;
 			const resData = await res.data.data;
 
 			dispatch({
@@ -21,10 +21,10 @@ export const getWeather = (latitude, longitude) => {
 				payload: resData,
 			});
 
-			dispatch({
-				type: GET_HOURLY,
-				payload: hourlyData,
-			});
+			// dispatch({
+			// 	type: GET_HOURLY,
+			// 	payload: hourlyData,
+			// });
 		} catch (err) {
 			console.error(err);
 		}
