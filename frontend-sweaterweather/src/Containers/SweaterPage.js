@@ -1,5 +1,5 @@
 //libs
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 //components
 import Days from '../components/Days/Days';
@@ -14,15 +14,38 @@ const SweaterPage = () => {
 	const dispatch = useDispatch();
 	const location = useSelector(state => state.weatherReducer.location);
 	const weekWeather = useSelector(state => state.weatherReducer.weekly);
+	const [locationPermission, setLocationPermission] = useState(false);
+
+	// toDo: reorganize location permission gathering, use permissionStatus
+	// todo: prompt user before asking for location so as to create proper bond
+	// todo: create modal to ask for permission
+	// todo: create loader so app doesnt crash on init
+	//
 
 	// i want to create something that takes in redux state and sets it to localstorage in order to populate the website faster.
 
 	//
 
+	// console.log(navigator.permissions.query);
+
+	const queryGeoPermissions = async () => {
+		let permissionStatus = await navigator.permissions.query({
+			name: 'geolocation',
+		});
+
+		console.log(permissionStatus);
+	};
+
+	queryGeoPermissions();
+
+	const handleAskForLocationPermission = userResponse => {};
+
+	useEffect(() => {});
+
 	// Get current latitude and longitude. Sets location state
 	useEffect(() => {
 		let options = {
-			enableHighAccuracy: true,
+			enableHighAccuracy: false,
 		};
 		let success = pos => {
 			const crd = pos.coords;
