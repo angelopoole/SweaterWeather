@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 //components
 import Days from '../components/Days/Days';
+import Loader from '../components/Loader/Loader';
 
 //redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,12 +16,14 @@ const SweaterPage = () => {
 	const location = useSelector(state => state.weatherReducer.location);
 	const weekWeather = useSelector(state => state.weatherReducer.weekly);
 	const [locationPermission, setLocationPermission] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	// toDo: reorganize location permission gathering, use permissionStatus
 	// todo: prompt user before asking for location so as to create proper bond
 	// todo: create modal to ask for permission
 	// todo: create loader so app doesnt crash on init
-	//
+	// todo: create loader component for loading while awaiting location.
+	// todo: memoize days component, currently each day is loading in at different times and causing 5 re-renders of the application
 
 	// i want to create something that takes in redux state and sets it to localstorage in order to populate the website faster.
 
@@ -36,7 +39,9 @@ const SweaterPage = () => {
 		console.log(permissionStatus);
 	};
 
-	queryGeoPermissions();
+	// console.log(weekWeather);
+
+	// queryGeoPermissions();
 
 	const handleAskForLocationPermission = userResponse => {};
 
@@ -44,10 +49,10 @@ const SweaterPage = () => {
 
 	// Get current latitude and longitude. Sets location state
 	useEffect(() => {
-		let options = {
+		const options = {
 			enableHighAccuracy: false,
 		};
-		let success = pos => {
+		const success = pos => {
 			const crd = pos.coords;
 			let payload = {
 				latitude: crd.latitude.toFixed(0),
@@ -62,7 +67,7 @@ const SweaterPage = () => {
 		function error(err) {
 			console.warn(`ERROR(${err.code}): ${err.message}`);
 		}
-
+		console.log('hit');
 		navigator.geolocation.getCurrentPosition(success, error, options);
 	}, [dispatch]);
 
@@ -70,7 +75,8 @@ const SweaterPage = () => {
 	useEffect(() => {
 		const getFiveDayForcast = async location => {
 			const { latitude, longitude } = location;
-			dispatch(getWeather(latitude, longitude));
+			await dispatch(getWeather(latitude, longitude));
+			setIsLoading(false);
 		};
 		if (location.latitude === '') {
 			return;
@@ -78,6 +84,14 @@ const SweaterPage = () => {
 			getFiveDayForcast(location);
 		}
 	}, [location, dispatch]);
+
+	if (isLoading) {
+		return (
+			<>
+				<Loader />
+			</>
+		);
+	}
 
 	return (
 		<>

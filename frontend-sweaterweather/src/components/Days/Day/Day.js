@@ -9,7 +9,8 @@ import WeatherImage from './WeatherImage/WeatherImage';
 //Redux
 
 const DayWrapper = styled.div`
-	flex: 1;
+	/* flex: 0 auto; */
+	/* flex: 1; */
 	background-color: rgba(245, 245, 245, 0.65);
 	border-radius: 50px;
 	width: auto;
@@ -32,14 +33,23 @@ const celciusToFarenheight = celTemp => {
 };
 
 const Day = props => {
+	const { weatherImgCode, date, lowTemp, highTemp } = props;
+
+	const longDate = new Date(date)
+		.toDateString()
+		.split('')
+		.splice(0, 10)
+		.join('');
+
 	return (
 		<DayWrapper>
-			<WeatherImage weatherImgCode={props.weatherImgCode} />
-			{props.date}
+			<WeatherImage weatherImgCode={weatherImgCode} /> <br />
+			{longDate}
+			{/* {date} */}
 			<Temperature
 				conversion={celciusToFarenheight}
-				lowTemp={props.lowTemp}
-				highTemp={props.highTemp}
+				lowTemp={lowTemp}
+				highTemp={highTemp}
 			/>
 		</DayWrapper>
 	);

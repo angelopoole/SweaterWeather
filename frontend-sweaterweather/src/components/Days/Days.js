@@ -9,7 +9,7 @@ const DaysWrapper = styled.div`
 	/* Mobile devices & base */
 	display: flex;
 	flex-flow: column;
-	height: 100vh;
+	height: auto;
 
 	background: linear-gradient(
 		130deg,
@@ -18,7 +18,6 @@ const DaysWrapper = styled.div`
 		rgb(31, 157, 199) 100%
 	);
 	align-items: center;
-	/* width: auto; */
 	margin: auto;
 	overflow: scroll;
 	text-align: center;
@@ -27,17 +26,10 @@ const DaysWrapper = styled.div`
 
 	/* if the device is a desktop -> */
 	@media (min-width: 500px) {
-		width: auto;
-		background: linear-gradient(
-			130deg,
-			#83c7dd 20%,
-			rgb(50, 182, 226) 50%,
-			rgb(31, 157, 199) 100%
-		);
-		height: 110vh;
-		flex: 1;
+		overflow-y: hidden;
 		flex-flow: row;
-		justify-content: center;
+		width: auto;
+		height: 100vh;
 	}
 `;
 
@@ -59,11 +51,7 @@ const Days = props => {
 		});
 	}
 
-	return (
-		<DaysWrapper>
-			{days} <br />
-		</DaysWrapper>
-	);
+	return <DaysWrapper>{days}</DaysWrapper>;
 };
 
 export default Days;
