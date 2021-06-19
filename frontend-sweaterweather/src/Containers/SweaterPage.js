@@ -1,5 +1,5 @@
 //libs
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 //components
 import Days from '../components/Days/Days';
@@ -15,7 +15,7 @@ const SweaterPage = () => {
 	const dispatch = useDispatch();
 	const location = useSelector(state => state.weatherReducer.location);
 	const weekWeather = useSelector(state => state.weatherReducer.weekly);
-	const [locationPermission, setLocationPermission] = useState(false);
+	const [locationPermission, setLocationPermission] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	// toDo: reorganize location permission gathering, use permissionStatus
@@ -31,24 +31,7 @@ const SweaterPage = () => {
 
 	// console.log(navigator.permissions.query);
 
-	const queryGeoPermissions = async () => {
-		let permissionStatus = await navigator.permissions.query({
-			name: 'geolocation',
-		});
-
-		console.log(permissionStatus);
-	};
-
-	// console.log(weekWeather);
-
-	// queryGeoPermissions();
-
-	const handleAskForLocationPermission = userResponse => {};
-
-	useEffect(() => {});
-
-	// Get current latitude and longitude. Sets location state
-	useEffect(() => {
+	const queryGeoPermissions = useCallback(async () => {
 		const options = {
 			enableHighAccuracy: false,
 		};
@@ -64,26 +47,81 @@ const SweaterPage = () => {
 				payload,
 			});
 		};
-		function error(err) {
+		const error = err => {
 			console.warn(`ERROR(${err.code}): ${err.message}`);
+		};
+
+		let permissionStatus = await navigator.permissions.query({
+			name: 'geolocation',
+		});
+		setLocationPermission(permissionStatus.state);
+		if (permissionStatus.state === 'granted') {
+			return await navigator.geolocation.getCurrentPosition(success);
+		} else if (permissionStatus.state === 'prompt') {
+			// ! here we want to flip state to allow for user to respond to our request
+			await navigator.geolocation.getCurrentPosition(success, error, options);
+		} else if (permissionStatus.state === 'denied') {
+			console.warn('user has denied permissions');
+		} else {
 		}
-		console.log('hit');
-		navigator.geolocation.getCurrentPosition(success, error, options);
+
+		console.log(permissionStatus);
 	}, [dispatch]);
 
-	// ping api for weather data based on current location. Sets weather state
-	useEffect(() => {
-		const getFiveDayForcast = async location => {
+	// useCa
+
+	const getFiveDayForcast = useCallback(
+		async location => {
 			const { latitude, longitude } = location;
-			await dispatch(getWeather(latitude, longitude));
+			dispatch(getWeather(latitude, longitude));
 			setIsLoading(false);
-		};
+		},
+		[dispatch]
+	);
+
+	// queryGeoPermissions();
+
+	// todo const handleAskForLocationPermission = userResponse => {};
+
+	// * Get current latitude and longitude. Sets location state.
+	// * This is using the navigation browser api
+	useEffect(() => {
+		if (!locationPermission) {
+			queryGeoPermissions();
+		}
+
 		if (location.latitude === '') {
-			return;
 		} else {
+			console.log('hit', locationPermission);
 			getFiveDayForcast(location);
 		}
-	}, [location, dispatch]);
+	}, [queryGeoPermissions, getFiveDayForcast, locationPermission, location]);
+
+	// useEffect(() => {
+	// 	const options = {
+	// 		enableHighAccuracy: false,
+	// 	};
+	// 	const success = pos => {
+	// 		const crd = pos.coords;
+	// 		let payload = {
+	// 			latitude: crd.latitude.toFixed(0),
+	// 			longitude: crd.longitude.toFixed(0),
+	// 		};
+
+	// 		dispatch({
+	// 			type: 'SET_LOCATION',
+	// 			payload,
+	// 		});
+	// 	};
+	// 	function error(err) {
+	// 		console.warn(`ERROR(${err.code}): ${err.message}`);
+	// 	}
+	// 	console.log('hit');
+	// 	navigator.geolocation.getCurrentPosition(success, error, options);
+	// }, [dispatch]);
+
+	// ping api for weather data based on current location. Sets weather state
+	// useEffect(() => {}, [location, dispatch]);
 
 	if (isLoading) {
 		return (
