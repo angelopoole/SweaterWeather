@@ -63,12 +63,11 @@ const SweaterPage = () => {
 		} else if (permissionStatus.state === 'denied') {
 			console.warn('user has denied permissions');
 		} else {
+			console.log('not allowed on this browser');
 		}
 
 		console.log(permissionStatus);
 	}, [dispatch]);
-
-	// useCa
 
 	const getFiveDayForcast = useCallback(
 		async location => {
@@ -78,8 +77,6 @@ const SweaterPage = () => {
 		},
 		[dispatch]
 	);
-
-	// queryGeoPermissions();
 
 	// todo const handleAskForLocationPermission = userResponse => {};
 
@@ -91,37 +88,12 @@ const SweaterPage = () => {
 		}
 
 		if (location.latitude === '') {
+			console.log('empty location');
 		} else {
 			console.log('hit', locationPermission);
 			getFiveDayForcast(location);
 		}
 	}, [queryGeoPermissions, getFiveDayForcast, locationPermission, location]);
-
-	// useEffect(() => {
-	// 	const options = {
-	// 		enableHighAccuracy: false,
-	// 	};
-	// 	const success = pos => {
-	// 		const crd = pos.coords;
-	// 		let payload = {
-	// 			latitude: crd.latitude.toFixed(0),
-	// 			longitude: crd.longitude.toFixed(0),
-	// 		};
-
-	// 		dispatch({
-	// 			type: 'SET_LOCATION',
-	// 			payload,
-	// 		});
-	// 	};
-	// 	function error(err) {
-	// 		console.warn(`ERROR(${err.code}): ${err.message}`);
-	// 	}
-	// 	console.log('hit');
-	// 	navigator.geolocation.getCurrentPosition(success, error, options);
-	// }, [dispatch]);
-
-	// ping api for weather data based on current location. Sets weather state
-	// useEffect(() => {}, [location, dispatch]);
 
 	if (isLoading) {
 		return (
