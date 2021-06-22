@@ -121,7 +121,13 @@ const SweaterPage = () => {
 		locationPermissionUserResponse,
 	]);
 
-	console.log(weekWeather);
+	// console.log(weekWeather);
+
+	useEffect(() => {
+		console.log(
+			'Thank you for checking out my project! If you find any bugs or issues please email me -> 📧 '
+		);
+	}, []);
 
 	if (locationPermissionUserResponse === false) {
 		return (

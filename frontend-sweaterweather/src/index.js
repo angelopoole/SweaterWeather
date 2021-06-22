@@ -9,11 +9,11 @@ import store from './Redux/store';
 import { saveState } from './utils/localStorage';
 import throttle from 'lodash/throttle';
 
-// store.subscribe(
-// 	throttle(() => {
-// 		saveState(store.getState());
-// 	}, 60000)
-// );
+store.subscribe(
+	throttle(() => {
+		saveState(store.getState());
+	}, 60000)
+);
 
 ReactDOM.render(
 	<React.StrictMode>

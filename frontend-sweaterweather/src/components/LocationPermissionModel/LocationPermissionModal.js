@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import DarkenBackground from '../util/DarkenBackground';
+// import DarkenBackground from '../util/DarkenBackground';
 
 const LocationPermissionModalStyles = styled.div`
 	z-index: 400;
