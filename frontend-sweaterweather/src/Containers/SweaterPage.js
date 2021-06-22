@@ -1,13 +1,15 @@
-//libs
+// * libs
 import React, { useEffect, useState, useCallback } from 'react';
 
-//components
+// * components
 import Days from '../components/Days/Days';
 import Loader from '../components/Loader/Loader';
 
-//redux
+// * redux
 import { useDispatch, useSelector } from 'react-redux';
 import { getWeather } from '../Redux/Actions/weatherAction';
+
+// * components
 
 // The Sweater page takes in components from days and uses it to display date, weather and sweater status
 

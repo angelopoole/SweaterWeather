@@ -31,6 +31,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
 	root: {
 		display: 'flex',
+		backgroundColor: 'rgb(50 182 226)',
 	},
 	appBar: {
 		zIndex: theme.zIndex.drawer + 1,
@@ -86,6 +87,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	content: {
 		flexGrow: 1,
+		// overflowY: 'hidden',
 		padding: theme.spacing(3),
 	},
 }));
@@ -172,7 +174,7 @@ export default function Layout(props) {
 				<Divider />
 				<List>
 					{['Weather', 'Calendar'].map((text, index) => (
-						<ListItem button key={text} style={{ height: '45vh' }} title={text}>
+						<ListItem button key={text} style={{ height: '7rem' }} title={text}>
 							<ListItemIcon>
 								{index % 2 === 0 ? (
 									<CloudTwoToneIcon />

@@ -9,8 +9,7 @@ const DaysWrapper = styled.div`
 	/* Mobile devices & base */
 	display: flex;
 	flex-flow: column;
-	height: auto;
-
+	height: 100%;
 	background: linear-gradient(
 		130deg,
 		#83c7dd 20%,
@@ -22,7 +21,8 @@ const DaysWrapper = styled.div`
 	overflow: scroll;
 	text-align: center;
 	font-size: 1.2rem;
-	overflow-y: scroll;
+	/* overflow-y: visible; */
+	/* overflow-y: scroll; */
 
 	/* if the device is a desktop -> */
 	@media (min-width: 500px) {

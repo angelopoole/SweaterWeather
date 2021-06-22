@@ -11,7 +11,8 @@ import WeatherImage from './WeatherImage/WeatherImage';
 // TODO check to see if day component date props is the same as the current day, highlight day  -> #ffc800 color for only that day.
 
 const DayWrapper = styled.div`
-	background-color: rgba(245, 245, 245, 0.65);
+	background-color: ${props =>
+		props.isToday ? 'hsl(39, 100%, 62%)' : 'rgba(245, 245, 245, 0.65)'};
 	border-radius: 50px;
 	width: auto;
 	margin: 5px 15px;
@@ -33,15 +34,17 @@ const celciusToFarenheight = celTemp => {
 
 const Day = props => {
 	const { weatherImgCode, date, lowTemp, highTemp } = props;
-
+	const todaysDate = new Date().toDateString().split('').splice(0, 10).join('');
 	const longDate = new Date(date)
 		.toDateString()
 		.split('')
 		.splice(0, 10)
 		.join('');
 
+	const isToday = todaysDate === longDate ? true : false;
+
 	return (
-		<DayWrapper>
+		<DayWrapper isToday={isToday}>
 			<WeatherImage weatherImgCode={weatherImgCode} /> <br />
 			{longDate}
 			{/* {date} */}
