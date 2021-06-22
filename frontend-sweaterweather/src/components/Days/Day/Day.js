@@ -8,14 +8,15 @@ import WeatherImage from './WeatherImage/WeatherImage';
 
 //Redux
 
+// TODO check to see if day component date props is the same as the current day, highlight day  -> #ffc800 color for only that day.
+
 const DayWrapper = styled.div`
-	flex: 1;
-	background-color: rgba(245, 245, 245, 0.65);
+	background-color: ${props =>
+		props.isToday ? 'hsl(39, 100%, 62%)' : 'rgba(245, 245, 245, 0.65)'};
 	border-radius: 50px;
 	width: auto;
 	margin: 5px 15px;
 	padding: 0.09px 40px;
-	/* padding: 10px 50px; */
 	transition: 0.3s all ease;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
 		0 0 40px rgba(128, 128, 128, 0.1) inset;
@@ -32,14 +33,25 @@ const celciusToFarenheight = celTemp => {
 };
 
 const Day = props => {
+	const { weatherImgCode, date, lowTemp, highTemp } = props;
+	const todaysDate = new Date().toDateString().split('').splice(0, 10).join('');
+	const longDate = new Date(date)
+		.toDateString()
+		.split('')
+		.splice(0, 10)
+		.join('');
+
+	const isToday = todaysDate === longDate ? true : false;
+
 	return (
-		<DayWrapper>
-			<WeatherImage weatherImgCode={props.weatherImgCode} />
-			{props.date}
+		<DayWrapper isToday={isToday}>
+			<WeatherImage weatherImgCode={weatherImgCode} /> <br />
+			{longDate}
+			{/* {date} */}
 			<Temperature
 				conversion={celciusToFarenheight}
-				lowTemp={props.lowTemp}
-				highTemp={props.highTemp}
+				lowTemp={lowTemp}
+				highTemp={highTemp}
 			/>
 		</DayWrapper>
 	);

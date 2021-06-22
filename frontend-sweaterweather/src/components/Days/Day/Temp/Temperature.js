@@ -6,13 +6,20 @@ const Temperature = props => {
 	let lowFaren = props.conversion(props.lowTemp);
 	let scale = scaleCelcius ? 'C' : 'F';
 
-	let clothingChoice = () => {
-		if (lowFaren <= 55) {
-			return <p> WEAR A COAT 🧥 </p>;
-		} else if (lowFaren <= 65 && lowFaren > 55) {
-			return <p> ITS SWEATER WEATHER 🍂 </p>;
-		}
-	};
+	let clothingChoice;
+
+	if (highFaren <= 55) {
+		clothingChoice = <p> WEAR A COAT 🧥 </p>;
+	} else if (highFaren <= 65 && highFaren > 55) {
+		clothingChoice = <p> ITS SWEATER WEATHER 🍂 </p>;
+	} else {
+		clothingChoice = <p> LOOKS HOT TODAY ☀️ </p>;
+	}
+
+	// console.log({ lowFaren, highFaren });
+
+	//// let clothingChoice = () => {
+	//// };
 
 	return (
 		<>
@@ -20,7 +27,7 @@ const Temperature = props => {
 				HIGH: {scaleCelcius ? props.highTemp : highFaren}°{scale} <br />
 				LOW: {scaleCelcius ? props.lowTemp : lowFaren}°{scale}
 			</div>
-			{clothingChoice()}
+			{clothingChoice}
 		</>
 	);
 };
