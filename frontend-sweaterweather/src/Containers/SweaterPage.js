@@ -4,6 +4,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 // * components
 import Days from '../components/Days/Days';
 import Loader from '../components/Loader/Loader';
+import LocationPermissionModal from '../components/LocationPermissionModel/LocationPermissionModal';
 
 // * redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +21,11 @@ const SweaterPage = () => {
 	const [locationPermission, setLocationPermission] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
+	// background modal will not show immediately, it will be set when asking user for permission to location.
+	const [showBackgroundModal, setShowBackgroundModel] = useState(false);
+	const [locationPermissionUserResponse, setLocationPermissionUserResponse] =
+		useState(null);
+
 	// toDo: reorganize location permission gathering, use permissionStatus
 	// todo: prompt user before asking for location so as to create proper bond
 	// todo: create modal to ask for permission
@@ -28,8 +34,6 @@ const SweaterPage = () => {
 	// todo: memoize days component, currently each day is loading in at different times and causing 5 re-renders of the application
 
 	// i want to create something that takes in redux state and sets it to localstorage in order to populate the website faster.
-
-	//
 
 	// console.log(navigator.permissions.query);
 
@@ -52,7 +56,15 @@ const SweaterPage = () => {
 		const error = err => {
 			console.warn(`ERROR(${err.code}): ${err.message}`);
 		};
-
+		if (locationPermissionUserResponse === true) {
+			//// console.log('locationPermissionUserResponse');
+			setLocationPermission(null);
+			return await navigator.geolocation.getCurrentPosition(
+				success,
+				error,
+				options
+			);
+		}
 		let permissionStatus = await navigator.permissions.query({
 			name: 'geolocation',
 		});
@@ -60,16 +72,17 @@ const SweaterPage = () => {
 		if (permissionStatus.state === 'granted') {
 			return await navigator.geolocation.getCurrentPosition(success);
 		} else if (permissionStatus.state === 'prompt') {
+			//// console.log('prompt please');
 			// ! here we want to flip state to allow for user to respond to our request
-			await navigator.geolocation.getCurrentPosition(success, error, options);
+			setShowBackgroundModel(true);
 		} else if (permissionStatus.state === 'denied') {
 			console.warn('user has denied permissions');
 		} else {
 			console.log('not allowed on this browser');
 		}
 
-		console.log(permissionStatus);
-	}, [dispatch]);
+		//// console.log(permissionStatus);
+	}, [dispatch, locationPermissionUserResponse]);
 
 	const getFiveDayForcast = useCallback(
 		async location => {
@@ -80,24 +93,58 @@ const SweaterPage = () => {
 		[dispatch]
 	);
 
+	const handleLocationPermissionResponse = async userAnswer => {
+		if (userAnswer === 'allow') {
+			setLocationPermissionUserResponse(true);
+			setShowBackgroundModel(false);
+		} else {
+			setLocationPermissionUserResponse(false);
+			// setNoLocationPermissions(true);
+		}
+	};
+
 	// todo const handleAskForLocationPermission = userResponse => {};
 
 	// * Get current latitude and longitude. Sets location state.
 	// * This is using the navigation browser api
 	useEffect(() => {
-		if (!locationPermission) {
+		if (!locationPermission || locationPermissionUserResponse) {
 			queryGeoPermissions();
 		}
 
 		if (location.latitude === '') {
-			console.log('empty location');
+			console.warn('empty location');
 		} else {
-			console.log('hit', locationPermission);
+			// console.success('hit', locationPermission);
 			getFiveDayForcast(location);
 		}
-	}, [queryGeoPermissions, getFiveDayForcast, locationPermission, location]);
+	}, [
+		queryGeoPermissions,
+		getFiveDayForcast,
+		locationPermission,
+		location,
+		locationPermissionUserResponse,
+	]);
 
-	if (isLoading) {
+	console.log(weekWeather);
+
+	if (locationPermissionUserResponse === false) {
+		return (
+			<>
+				<main>
+					website requires location permissions, please grant and reload.{' '}
+				</main>
+			</>
+		);
+	} else if (isLoading && showBackgroundModal === true) {
+		return (
+			<>
+				<LocationPermissionModal
+					handleLocationPermissionResponse={handleLocationPermissionResponse}
+				/>
+			</>
+		);
+	} else if (isLoading) {
 		return (
 			<>
 				<Loader />

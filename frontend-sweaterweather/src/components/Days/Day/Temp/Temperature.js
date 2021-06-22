@@ -8,12 +8,12 @@ const Temperature = props => {
 
 	let clothingChoice;
 
-	if (lowFaren <= 55) {
+	if (highFaren <= 55) {
 		clothingChoice = <p> WEAR A COAT 🧥 </p>;
-	} else if (lowFaren <= 65 && lowFaren > 55) {
+	} else if (highFaren <= 65 && highFaren > 55) {
 		clothingChoice = <p> ITS SWEATER WEATHER 🍂 </p>;
 	} else {
-		clothingChoice = <p> LOOKS SUNNY ☀️ </p>;
+		clothingChoice = <p> LOOKS HOT TODAY ☀️ </p>;
 	}
 
 	// console.log({ lowFaren, highFaren });
