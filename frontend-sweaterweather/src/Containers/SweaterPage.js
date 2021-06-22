@@ -26,11 +26,6 @@ const SweaterPage = () => {
 	const [locationPermissionUserResponse, setLocationPermissionUserResponse] =
 		useState(null);
 
-	// toDo: reorganize location permission gathering, use permissionStatus
-	// todo: prompt user before asking for location so as to create proper bond
-	// todo: create modal to ask for permission
-	// todo: create loader so app doesnt crash on init
-	// todo: create loader component for loading while awaiting location.
 	// todo: memoize days component, currently each day is loading in at different times and causing 5 re-renders of the application
 
 	// i want to create something that takes in redux state and sets it to localstorage in order to populate the website faster.
