@@ -4,6 +4,7 @@ const Temperature = props => {
 	let scaleCelcius = useSelector(state => state.weatherReducer.scaleCelcius);
 	let highFaren = props.conversion(props.highTemp);
 	let lowFaren = props.conversion(props.lowTemp);
+
 	let scale = scaleCelcius ? 'C' : 'F';
 
 	let clothingChoice;
@@ -13,7 +14,7 @@ const Temperature = props => {
 	} else if (highFaren <= 65 && highFaren > 55) {
 		clothingChoice = <p> ITS SWEATER WEATHER 🍂 </p>;
 	} else {
-		clothingChoice = <p> LOOKS HOT TODAY ☀️ </p>;
+		clothingChoice = <p> LOOKS HOT ☀️ </p>;
 	}
 
 	// console.log({ lowFaren, highFaren });
@@ -23,7 +24,7 @@ const Temperature = props => {
 
 	return (
 		<>
-			<div>
+			<div id='temperature-div'>
 				HIGH: {scaleCelcius ? props.highTemp : highFaren}°{scale} <br />
 				LOW: {scaleCelcius ? props.lowTemp : lowFaren}°{scale}
 			</div>

@@ -29,7 +29,8 @@ const DaysWrapper = styled.div`
 		overflow-y: hidden;
 		flex-flow: row;
 		width: auto;
-		height: 100vh;
+		height: 100%;
+		overflow-y: hidden;
 	}
 `;
 
