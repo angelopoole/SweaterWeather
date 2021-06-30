@@ -13,10 +13,11 @@ import WeatherImage from './WeatherImage/WeatherImage';
 const DayWrapper = styled.div`
 	background-color: ${props =>
 		props.isToday ? 'hsl(39, 100%, 62%)' : 'rgba(245, 245, 245, 0.65)'};
-	border-radius: 50px;
-	width: auto;
+	border-radius: 3rem;
+	min-height: 25rem;
+	width: 80%;
 	margin: 5px 15px;
-	padding: 0.09px 40px;
+	/* padding: 0.09px 40px; */
 	transition: 0.3s all ease;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
 		0 0 40px rgba(128, 128, 128, 0.1) inset;
@@ -24,6 +25,15 @@ const DayWrapper = styled.div`
 	&:hover {
 		cursor: pointer;
 		box-shadow: 9px 7px 40px -6px rgba(0, 0, 0, 0.25);
+	}
+
+	em {
+		display: inline-block;
+		margin-top: 0.5rem;
+	}
+
+	#temperature-div {
+		margin-top: 2rem;
 	}
 `;
 
@@ -46,8 +56,7 @@ const Day = props => {
 	return (
 		<DayWrapper isToday={isToday}>
 			<WeatherImage weatherImgCode={weatherImgCode} /> <br />
-			{longDate}
-			{/* {date} */}
+			<em>{longDate}</em>
 			<Temperature
 				conversion={celciusToFarenheight}
 				lowTemp={lowTemp}
